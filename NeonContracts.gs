@@ -58,41 +58,47 @@ function saveEmails() {
             // let subject = msg.getSubject();
             let body = msg.getBody();
 
-            let preString = "Items: ";
-            let searchString = "<br>";
-            let items = getCellContents(body, preString, searchString)
+            let locatorString = "Items: ";
+            let endingString = "<br>";
+            let items = extractEmailItems(body, locatorString, endingString)
             // console.log("Items:", items)
 
-             preString = "Purchaser: ";
-             searchString = "<br>";
-            let purchaser = getCellContents(body, preString, searchString)
+             locatorString = "Purchaser: ";
+             endingString = "<br>";
+            let purchaser = extractEmailItems(body, locatorString, endingString)
             // console.log("purchaser:", purchaser)
 
-             preString = "Performance Location: ";
-             searchString = "<br>";
-            let performanceLocation = getCellContents(body, preString, searchString)
+             locatorString = "Performance Location: ";
+             endingString = "<br>";
+            let performanceLocation = extractEmailItems(body, locatorString, endingString)
             // console.log("Performance Location:", performanceLocation)
 
-             preString = "Performance Date: ";
-             searchString = "<br>";
-            let performanceDate = getCellContents(body, preString, searchString)
+             locatorString = "Performance Date: ";
+             endingString = "<br>";
+            let performanceDate = extractEmailItems(body, locatorString, endingString)
             // console.log("Performance Date:", performanceDate)
 
-             preString = "Performance Time: ";
-             searchString = "<br>";
-            let performanceTime = getCellContents(body, preString, searchString)
+             locatorString = "Performance Time: ";
+             endingString = "<br>";
+            let performanceTime = extractEmailItems(body, locatorString, endingString)
             // console.log("Performance Time: ", performanceTime)
 
-             preString = "Special Instructions:";
-             searchString = "<br>";
-            let specialInstructions = getCellContents(body, preString, searchString)
+             locatorString = "Special Instructions:";
+             endingString = "<br>";
+            let specialInstructions = extractEmailItems(body, locatorString, endingString)
             // console.log("Special Instructions:", specialInstructions)
 
-             preString = "Advisor Contact: ";
-             searchString = " / ";
-            let directorPhone = getCellContents(body, preString, searchString)
-            console.log("Director / Advisor Contact: ", directorPhone)
+             locatorString = "Advisor Contact: ";
+             endingString = " / ";
+            let directorName = extractEmailItems(body, locatorString, endingString)
+            console.log("Director / Advisor Name: ", directorName)
 
+
+          let locator1 = "Advisor Contact: ";
+          let locator2 = "Phone";
+          endingString = "/ Email"
+          let directorPhone = extractDeeperEmailItems(body, locator1,locator2,endingString)
+          console.log("Director / Advisor Phone: ", directorPhone)
 
 
 
@@ -141,20 +147,61 @@ function appendData(line, array2d) {
 
 
 
-function getCellContents(body, preString, searchString){
+function extractEmailItems(body, locatorString, endingString){
 
   //find index of locater string (like Purchaser: )
-	let preIndex = body.indexOf(preString);
+	let preIndex = body.indexOf(locatorString);
 
   //get index of 1st <br> after the preIndex - substring w/1 variable goes to end
-	let searchIndex = body.substring(preIndex).indexOf(searchString);
+	let searchIndex = body.substring(preIndex).indexOf(endingString);
   //add it to the preIndex to get actual index
   searchIndex += preIndex
   
-  //get where to start substring (end of preString)
-  preIndex = preIndex + preString.length;
+  //get where to start substring (end of locatorString)
+  preIndex = preIndex + locatorString.length;
 	return body.slice(preIndex, searchIndex);
 }
+
+function extractDeeperEmailItems(body, locator1,locator2,endingString){
+
+let offset1 = body.indexOf(locator1);
+  console.log("offset1", offset1);
+
+let offset2 = body.substring(offset1).indexOf(locator2);
+console.log("offset2", offset2);
+
+let offset3 = body.substring(offset1+offset2).indexOf(endingString);
+console.log("offset3", offset3);
+
+let preIndex = offset1+offset2+locator2.length
+console.log("preIndex", preIndex);
+
+let lastIndex = offset1+offset2+offset3
+console.log("lastIndex", lastIndex);
+
+return body.slice(preIndex, lastIndex);
+
+}
+
+// //find index of locater string (like Purchaser: )
+// 	let preIndex = body.indexOf(locator1);
+//   console.log("preIndex", preIndex);
+//   console.log("preIndex string: ", body.substring(preIndex, preIndex+5));
+
+//   //get index of 1st locator string after the preIndex
+// 	let midIndex = body.substring(preIndex).indexOf(locator2)
+//    console.log("midIndex", midIndex);
+//    console.log("midIndex string", body.substring(midIndex,midIndex+3));
+
+//   let lastIndex = body.substring(preIndex+midIndex).indexOf(endingString)
+//    console.log("lastIndex", lastIndex);
+//    console.log("lastIndex string", body.substring(lastIndex,lastIndex+7));
+  
+//   //get where to start substring (end of locatorString)
+//   preIndex += midIndex + locator2.length;
+//    console.log("final preIndex", preIndex);
+
+
 
 
 
