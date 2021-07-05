@@ -96,7 +96,7 @@ function saveEmails() {
 
           let locator1 = "Advisor Contact: ";
           let locator2 = "Phone";
-          endingString = "/ Email"
+          endingString = "/"
           let directorPhone = extractDeeperEmailItems(body, locator1,locator2,endingString)
           console.log("Director / Advisor Phone: ", directorPhone)
 
