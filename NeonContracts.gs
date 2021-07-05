@@ -128,6 +128,11 @@ function saveEmails() {
             let emergencyNumber = extractEmailItems(body, locatorString, endingString)
             console.log("emergencyNumber: ", emergencyNumber)
 
+          locatorString = "Mailing Address:";
+          endingString = "<br>";
+            let mailingAddressFull = extractEmailItems(body, locatorString, endingString)
+            console.log("Mailing Address (full): ", mailingAddressFull)
+
 
 
 
