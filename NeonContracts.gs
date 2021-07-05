@@ -111,6 +111,23 @@ function saveEmails() {
             let studentName = extractEmailItems(body, locatorString, endingString)
             console.log("Student Contact: ", studentName)
 
+          locator1 = "Student Contact:";
+          locator2 = "Phone";
+          endingString = "/"
+          let studentPhone = extractDeeperEmailItems(body, locator1,locator2,endingString)
+          console.log("Student Phone: ", studentPhone)
+
+          locator1 = "Student Contact:";
+          locator2 = "mailto:";
+          endingString = '">';
+          let studentEmail = extractDeeperEmailItems(body, locator1,locator2,endingString)
+          console.log("Student email: ", studentEmail)
+
+          locatorString = "Emergency Number:";
+          endingString = "<br>";
+            let emergencyNumber = extractEmailItems(body, locatorString, endingString)
+            console.log("emergencyNumber: ", emergencyNumber)
+
 
 
 
