@@ -38,7 +38,7 @@ function saveEmails() {
     }
 
     // Add Sheet header collumns ✏️
-    appendData(1, [["Last Contacted","Contact next","Contact notes","Date contract sent","Items"]]);
+    appendData(1, [["Contract Date","Items", "purchaser", "performance Location", "Performance Date", "performance Time", "special Instructions", "director Name", "director Phone", "director Email", "student Name", "student Phone", "student Email", "emergency Number", "address1", "city", "state", "zip", "hotel", "sound", "ground Info", "price", "price Includes", "tax Notes", "twoChecks", "contract Questions"]]);
     
 
     let totalEmails = 0;
@@ -60,6 +60,10 @@ function saveEmails() {
             let to = msg.getTo();
             // let subject = msg.getSubject();
             let body = msg.getBody();
+
+            //remove some junk
+            let i= body.replace('<font color="red"></font>','');
+            body = i;
 
             let locatorString = "Items: ";
             let endingString = "<br>";
@@ -197,11 +201,11 @@ function saveEmails() {
             let contractQuestions = extractEmailItems(body, locatorString, endingString)
             console.log("contractQuestions:", contractQuestions)
 
-
-            let dataLine = [date,body];
+          // -----------------------------CREATE ROW HERE -------------------------------------
+            let dataLine = [date,items, purchaser, performanceLocation, performanceDate, performanceTime, specialInstructions, directorName, directorPhone, directorEmail, studentName, studentPhone, studentEmail, emergencyNumber, address1, city, state, zip, hotel, sound, groundInfo, price, priceIncludes, taxNotes, twoChecks, contractQuestions];
             //console.log(dataLine)
 
-            // Add values to array
+            // --------------------------Add values to array ---------------------------------
             if (!AVOID_REPEATED_ADDRESS || (AVOID_REPEATED_ADDRESS && !addresses.includes(to))){
               emails.push(dataLine);
               addresses.push(to);
