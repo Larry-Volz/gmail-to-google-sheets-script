@@ -1,4 +1,3 @@
-          let state = getState(mailingAddressFull, zip);
 // Starter Google Script searches Gmail account, and stores the results on a Google Sheet file
 // Original thanks to: https://github.com/TiagoGouvea/gmail-to-google-sheets-script/
 
@@ -151,6 +150,52 @@ function saveEmails() {
           console.log("State:", state);
           console.log("Zip: ", zip);
 
+
+          locatorString = "Hotel: ";
+            endingString = "<br>";
+            let hotel = extractEmailItems(body, locatorString, endingString)
+            console.log("Hotel:", hotel)
+
+          locatorString = "Sound";
+            endingString = "<br>";
+            let sound = extractEmailItems(body, locatorString, endingString)
+            console.log("sound:", sound)
+          
+
+          locatorString = "GROUND INFORMATION </b><br>";
+            endingString = "<br>";
+            let groundInfo = extractEmailItems(body, locatorString, endingString)
+            console.log("groundInfo:", groundInfo)
+          
+           locatorString = "after commission): ";
+            endingString = "<br>";
+            let price = extractEmailItems(body, locatorString, endingString)
+            console.log("price:", price)
+
+
+          locatorString = "Price Includes: ";
+            endingString = "<br>";
+            let priceIncludes = extractEmailItems(body, locatorString, endingString)
+            console.log("priceIncludes:", priceIncludes)
+
+
+          locatorString = "Tax Notes; ";
+            endingString = "<br>";
+            let taxNotes = extractEmailItems(body, locatorString, endingString)
+            console.log("taxNotes:", taxNotes)
+
+
+          locatorString = "Two Checks: ";
+            endingString = "<br>";
+            let twoChecks = extractEmailItems(body, locatorString, endingString)
+            console.log("twoChecks:", twoChecks)
+
+
+           
+          locatorString = "Contract Questions:";
+            endingString = "<br>";
+            let contractQuestions = extractEmailItems(body, locatorString, endingString)
+            console.log("contractQuestions:", contractQuestions)
 
 
             let dataLine = [date,body];
