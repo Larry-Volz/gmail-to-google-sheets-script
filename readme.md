@@ -2,7 +2,11 @@
 
 **NeonContracts.gs is the COMPLETE app script copied back down from google script app and is working**
 
-This Google Script can do any search on your Gmail account, and store the results on a sheet file.
+NeonContracts.gs I wrote based on the original script cloned from below that scrapes e-mails for specific data and then distributes that data into the correct cells in a google spreadsheet.  
+
+It's a good template for that kind of thing if your emails have predictable patterns.  Notice how I distributed the address by using javascript .subscript and .slice and reversed the string, stripped off the zip since it is predictable (compensating for 5 and 5+4 formats), then stripped off the state since it is predictably book-ended with commmas, city for the same reason and then the rest was the street address.  Prevented having to compare with states.  Does not separate between address1 and 2. 
+
+The rest of this Google Script can do any search on your Gmail account, and store the results on a sheet file.
 
 The search will be made on your gmail account, from your Google Script. All data will be changed inside your account, with no external access to it.
 
