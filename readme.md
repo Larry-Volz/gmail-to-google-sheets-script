@@ -1,5 +1,7 @@
 # Gmail to Google Sheet Script
 
+**NeonContracts.gs is the COMPLETE app script copied back down from google script app and is working**
+
 This Google Script can do any search on your Gmail account, and store the results on a sheet file.
 
 The search will be made on your gmail account, from your Google Script. All data will be changed inside your account, with no external access to it.
